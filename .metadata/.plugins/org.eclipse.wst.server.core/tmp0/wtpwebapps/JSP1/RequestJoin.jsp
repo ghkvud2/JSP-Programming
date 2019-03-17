@@ -9,7 +9,7 @@
 <body>
 
 	<center>
-		<h2>회원 가입</h2>
+		<h2>회원 가입 모드</h2>
 		<form action="RequestJoinProc.jsp" method="post">
 			<table border="1" width="500">
 				<tr height="50">
