@@ -3,6 +3,7 @@
 	<name>JSP2</name>
 	<comment></comment>
 	<projects>
+		<project>JSP1</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
