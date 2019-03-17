@@ -1,0 +1,3 @@
+#Tomcat publish data
+#Sun Mar 17 22:00:49 KST 2019
+org.eclipse.jst.jee.server\:JSP2=WEB-INF/lib/JSP2.jar
