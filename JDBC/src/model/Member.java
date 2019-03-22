@@ -12,11 +12,9 @@ public class Member {
 	private String age;
 	private String info;
 	
-
 	public String getId() {
 		return id;
 	}
-
 	public void setId(String id) {
 		this.id = id;
 	}
