@@ -1,19 +1,23 @@
 package model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 public class MemberDAO {
 
-	static String DB_DRIVER_CLASS = "oracle.jdbc.driver.OracleDriver";
-	static String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-	static String DB_USERNAME = "ghkvud";
-	static String DB_PASSWORD = "ghkvud";
+//	static String DB_DRIVER_CLASS = "oracle.jdbc.driver.OracleDriver";
+//	static String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
+//	static String DB_USERNAME = "ghkvud";
+//	static String DB_PASSWORD = "ghkvud";
 
 	static Connection conn = null;
 	static PreparedStatement pstmt = null;
@@ -22,10 +26,13 @@ public class MemberDAO {
 	public void getConnection() {
 
 		try {
-			Class.forName(DB_DRIVER_CLASS);
-			conn = DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
+
+			Context initCtx = new InitialContext();
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");
+			DataSource dataSource = (DataSource) envCtx.lookup("jdbc/pool");
+			conn = dataSource.getConnection();
+
+		} catch (NamingException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
