@@ -39,12 +39,11 @@
 
 			<tr height="40">
 				<td align="center" colspan="2" size="55">
-				<input type="submit" value="글쓰기"> &nbsp; &nbsp; 
+				<input type="submit" value="확인"> &nbsp; &nbsp; 
 				<input type="reset" value="지우기"> &nbsp; &nbsp;
 				<button onclick="location.href='BoardList.jsp'">전체 글보기</button>
 				</td>
 			</tr>
-
 		</table>
 	</form>
 </body>
