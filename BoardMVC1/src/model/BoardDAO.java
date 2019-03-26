@@ -32,14 +32,138 @@ public class BoardDAO {
 		}
 	}
 
-	//전체 게시글 얻어오기
-	//게시글 카운터는 다음에 구현
+	public void deleteBoard(int num) {
+		
+		getConnection();
+		try {
+			String sql = "delete from board where num=?";
+			pstmt = conn.prepareStatement(sql);
+			int idx = 1;
+			pstmt.setInt(idx++, num);
+
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void updateBoard(BoardBean boardBean) {
+
+		getConnection();
+
+		try {
+			String sql = "update board set subject=?, content=? where num=?";
+			pstmt = conn.prepareStatement(sql);
+			int idx = 1;
+			pstmt.setString(idx++, boardBean.getSubject());
+			pstmt.setString(idx++, boardBean.getContent());
+			pstmt.setInt(idx++, boardBean.getNum());
+
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	// 답변 게시글을 저장하는 메소드
+	public void reWriteBoard(BoardBean boardBean) {
+
+		// 우선적으로 부모 글의 [글 그룹], [글 스텝], [글 레벨] 값을 읽어드린다.
+		int ref = boardBean.getRef();
+		int re_step = boardBean.getRe_step();
+		int re_level = boardBean.getRe_level();
+
+		getConnection();
+
+		try {
+
+			// 부모 글보다 큰 [글 레벨]의 값을 전부 1씩 증가시킨다.
+			String levelSQL = "update board set re_level = re_level+1 where ref=? and re_level > ?";
+			pstmt = conn.prepareStatement(levelSQL);
+			pstmt.setInt(1, ref);
+			pstmt.setInt(2, re_level);
+			pstmt.executeUpdate();
+
+			String sql = "insert into board values(board_num_seq.nextval,?,?,?,?,sysdate,?,?,?,0,?)";
+			pstmt = conn.prepareStatement(sql);
+			int idx = 1;
+			pstmt.setString(idx++, boardBean.getWriter());
+			pstmt.setString(idx++, boardBean.getEmail());
+			pstmt.setString(idx++, boardBean.getSubject());
+			pstmt.setString(idx++, boardBean.getPassword());
+			pstmt.setInt(idx++, boardBean.getRef());
+			pstmt.setInt(idx++, boardBean.getRe_step() + 1);
+			pstmt.setInt(idx++, boardBean.getRe_level() + 1);
+			pstmt.setString(idx++, boardBean.getContent());
+			pstmt.executeUpdate();
+
+			pstmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
+	// 하나의 게시글을 select하는 메소드
+	public BoardBean getOneBoard(int num) {
+
+		BoardBean boardBean = new BoardBean();
+		getConnection();
+		try {
+
+			// 조회수 증가시키는 SQL
+			String readSQL = "update board set readcount = readcount+1 where num=?";
+			pstmt = conn.prepareStatement(readSQL);
+			pstmt.setInt(1, num);
+			pstmt.executeUpdate();
+			pstmt.close();
+			// 게시글 하나 가져오는 SQL
+			String sql = "select * from board where num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+
+				boardBean.setNum(rs.getInt("num"));
+				boardBean.setWriter(rs.getString("writer"));
+				boardBean.setEmail(rs.getString("email"));
+				boardBean.setSubject(rs.getString("subject"));
+				boardBean.setPassword(rs.getString("password"));
+				boardBean.setReg_date(rs.getDate("reg_date").toString());
+				boardBean.setRef(rs.getInt("ref"));
+				boardBean.setRe_step(rs.getInt("re_step"));
+				boardBean.setRe_level(rs.getInt("re_level"));
+				boardBean.setReadcount(rs.getInt("readcount"));
+				boardBean.setContent(rs.getString("content"));
+			}
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return boardBean;
+	}
+
+	// 전체 게시글 얻어오기
+	// 게시글 카운터는 다음에 구현
 	public List<BoardBean> getAllBoard() {
 
 		getConnection();
 		List<BoardBean> list = new ArrayList<>();
 		try {
-			String sql = "select * from board order by ref desc, re_step asc";
+			String sql = "select * from board order by ref desc, re_step asc, re_level asc";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -67,7 +191,7 @@ public class BoardDAO {
 		return list;
 	}
 
-	//새로운 글 DB에 저장하기
+	// 새로운 글 DB에 저장하기
 	public void insertBoard(BoardBean boardBean) {
 
 		int ref = 0; // 글 그룹, 쿼리를 실행해 가장 큰 ref값에 +1을 더해주면 됨

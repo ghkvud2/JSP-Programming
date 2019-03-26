@@ -32,8 +32,19 @@
 		<tr height="40">
 			<!-- 글 번호는 게시판 카운터를 구현하면서 같이 구현합니다.  -->
 			<td width="50" align="center">나중에 구현</td>
-			<td width="350" align="left"><a
-				href="BoardInfo.jsp?num=<%=boardBean.getNum()%>"><%=boardBean.getSubject()%></td>
+			<td width="350" align="left">
+			<a href="BoardInfo.jsp?num=<%=boardBean.getNum()%>" style="text-decoration: none">
+			<%
+				if(boardBean.getRe_step() > 1){
+					for(int i = 0 ; i < (boardBean.getRe_step()-1) * 3;i++){
+			%>
+					&nbsp;
+			<%		
+					}
+				}
+			%>
+			<%=boardBean.getSubject()%>
+			</td>
 			<td width="150" align="center"><%=boardBean.getWriter()%></td>
 			<td width="150" align="center"><%=boardBean.getReg_date()%></td>
 			<td width="100" align="center"><%=boardBean.getReadcount()%></td>
