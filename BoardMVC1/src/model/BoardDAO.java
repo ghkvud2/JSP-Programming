@@ -32,8 +32,28 @@ public class BoardDAO {
 		}
 	}
 
+	public int getAllCount() {
+
+		getConnection();
+		int count = 0;
+		try {
+			String sql = "select count(*) from board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				count = rs.getInt(1);
+			rs.close();
+			pstmt.close();
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+
 	public void deleteBoard(int num) {
-		
+
 		getConnection();
 		try {
 			String sql = "delete from board where num=?";
@@ -156,16 +176,28 @@ public class BoardDAO {
 		return boardBean;
 	}
 
-	// 전체 게시글 얻어오기
-	// 게시글 카운터는 다음에 구현
-	public List<BoardBean> getAllBoard() {
 
+	public List<BoardBean> getAllBoard(int startRow, int endRow) {
+		
 		getConnection();
 		List<BoardBean> list = new ArrayList<>();
+		
 		try {
-			String sql = "select * from board order by ref desc, re_step asc, re_level asc";
+			String sql = "select B.* " + 
+					"from (" + 
+					"    select rownum as rnum, A.* " + 
+					"    from (" + 
+					"        select * " + 
+					"        from board" + 
+					"        order by ref desc, re_step asc, re_level asc) A " + 
+					"    where rownum <= ?) B " + 
+					" where B.rnum >= ? ";
+			
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
 			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
 				BoardBean boardBean = new BoardBean();
 				boardBean.setNum(rs.getInt("num"));
