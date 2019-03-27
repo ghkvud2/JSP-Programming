@@ -19,7 +19,7 @@
 		for (String hobby : hobbys)
 			textHobby += hobby + " ";
 	%>
-	<jsp:useBean id="member" class="model.Member">
+	<jsp:useBean id="member" class="model.MemberBean">
 		<jsp:setProperty name="member" property="*" />
 		<jsp:setProperty name="member" property="hobby" value="<%=textHobby%>" />
 	</jsp:useBean>

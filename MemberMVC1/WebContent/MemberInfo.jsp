@@ -1,4 +1,4 @@
-<%@page import="model.Member"%>
+<%@page import="model.MemberBean"%>
 <%@page import="model.MemberDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
@@ -12,7 +12,7 @@
 	<%
 		String id = request.getParameter("id");
 		MemberDAO memberDAO = new MemberDAO();
-		Member member = memberDAO.selectMember(id);
+		MemberBean member = memberDAO.selectMember(id);
 	%>
 	<table align="center" width="400" border="1">
 		<tr height="50">

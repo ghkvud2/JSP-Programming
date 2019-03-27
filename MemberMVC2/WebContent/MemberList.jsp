@@ -4,7 +4,6 @@
 <%@page import="com.sun.swing.internal.plaf.metal.resources.metal"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
-
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -13,11 +12,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%
-		MemberDAO memberDAO = new MemberDAO();
-		List<MemberBean> list = memberDAO.selectAllMember();
-		request.setAttribute("list", list);
-	%>
 	<h2 align="center">모든 회원 정보 보기</h2>
 	<table align="center" width="800" border="1">
 		<tr height="50">

@@ -1,5 +1,4 @@
 <%@page import="model.MemberDAO"%>
-<%@page import="model.Member"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
@@ -12,7 +11,7 @@
 	<%
 		request.setCharacterEncoding("EUC-KR");
 	%>
-	<jsp:useBean id="member" class="model.Member">
+	<jsp:useBean id="member" class="model.MemberBean">
 		<jsp:setProperty name="member" property="*" /></jsp:useBean>
 
 	<%

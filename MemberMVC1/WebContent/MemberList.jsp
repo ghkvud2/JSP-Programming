@@ -1,4 +1,4 @@
-<%@page import="model.Member"%>
+<%@page import="model.MemberBean"%>
 <%@page import="java.util.List"%>
 <%@page import="model.MemberDAO"%>
 <%@page import="com.sun.swing.internal.plaf.metal.resources.metal"%>
@@ -13,7 +13,7 @@
 <body>
 	<%
 		MemberDAO memberDAO = new MemberDAO();
-			List<Member> list = memberDAO.selectAllMember();
+		List<MemberBean> list = memberDAO.selectAllMember();
 	%>
 	<h2 align="center">모든 회원 정보 보기</h2>
 	<table align="center" width="800" border="1">
@@ -24,7 +24,7 @@
 			<td align="center" width="200">취미</td>
 		</tr>
 		<%
-			for (Member member : list) {
+			for (MemberBean member : list) {
 		%>
 		<%-- 	<jsp:useBean id="bean" class="model.Member">
 			<jsp:setProperty name="bean" property="id" value="<%=member.getId() %>" />

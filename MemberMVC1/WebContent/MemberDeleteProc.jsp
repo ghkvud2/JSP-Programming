@@ -13,7 +13,7 @@
 		request.setCharacterEncoding("EUC-KR");
 	%>
 
-	<jsp:useBean id="member" class="model.Member">
+	<jsp:useBean id="member" class="model.MemberBean">
 		<jsp:setProperty name="member" property="*" />
 	</jsp:useBean>
 
