@@ -1,6 +1,6 @@
 package model;
 
-public class Member {
+public class MemberBean {
 	
 	private String id;
 	private String pass1;

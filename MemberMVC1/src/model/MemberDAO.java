@@ -32,7 +32,7 @@ public class MemberDAO {
 		}
 	}
 
-	public void deleteMember(Member member) {
+	public void deleteMember(MemberBean member) {
 		try {
 			getConnection();
 			String sql = "delete from member where id=?";
@@ -48,7 +48,7 @@ public class MemberDAO {
 		}
 	}
 
-	public void updateMember(Member member) {
+	public void updateMember(MemberBean member) {
 		try {
 			getConnection();
 			String sql = "update member set email=?, tel=? where id=?";
@@ -87,7 +87,7 @@ public class MemberDAO {
 		return pass1;
 	}
 
-	public void insertMember(Member member) {
+	public void insertMember(MemberBean member) {
 
 		try {
 			getConnection();
@@ -111,9 +111,9 @@ public class MemberDAO {
 		}
 	}
 
-	public Member selectMember(String id) {
+	public MemberBean selectMember(String id) {
 
-		Member member = new Member();
+		MemberBean member = new MemberBean();
 
 		try {
 			getConnection();
@@ -141,8 +141,8 @@ public class MemberDAO {
 		return member;
 	}
 
-	public List<Member> selectAllMember() {
-		List<Member> list = new ArrayList<>();
+	public List<MemberBean> selectAllMember() {
+		List<MemberBean> list = new ArrayList<>();
 		try {
 			getConnection();
 			String sql = "select * from member";
@@ -151,7 +151,7 @@ public class MemberDAO {
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				Member member = new Member();
+				MemberBean member = new MemberBean();
 				int idx = 1;
 				member.setId(rs.getString("id"));
 				member.setAge(rs.getString("age"));
