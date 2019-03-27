@@ -14,11 +14,6 @@ import javax.sql.DataSource;
 
 public class MemberDAO {
 
-//	static String DB_DRIVER_CLASS = "oracle.jdbc.driver.OracleDriver";
-//	static String DB_URL = "jdbc:oracle:thin:@localhost:1521:orcl";
-//	static String DB_USERNAME = "ghkvud";
-//	static String DB_PASSWORD = "ghkvud";
-
 	static Connection conn = null;
 	static PreparedStatement pstmt = null;
 	static ResultSet rs = null;
