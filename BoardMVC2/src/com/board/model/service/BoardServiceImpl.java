@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.board.model.bean.BoardBean;
 import com.board.model.dao.BoardDAOImpl;
+import com.board.util.PageNavigator;
 
 public class BoardServiceImpl implements BoardService {
 
@@ -48,8 +49,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardBean> getAllBoard() {
-		return BoardDAOImpl.getInstance().getAllBoard();
+	public List<BoardBean> getAllBoard(int startRow, int endRow) {
+		return BoardDAOImpl.getInstance().getAllBoard(startRow, endRow);
+	}
+
+	@Override
+	public PageNavigator getPageNavigator(int currentPage) {
+		return BoardDAOImpl.getInstance().getPageNavigator(currentPage);
 	}
 
 }

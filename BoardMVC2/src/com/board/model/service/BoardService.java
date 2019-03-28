@@ -3,6 +3,7 @@ package com.board.model.service;
 import java.util.List;
 
 import com.board.model.bean.BoardBean;
+import com.board.util.PageNavigator;
 
 public interface BoardService {
 
@@ -16,6 +17,7 @@ public interface BoardService {
 
 	public BoardBean getOneBoard(int num);
 
-	public List<BoardBean> getAllBoard();
+	public List<BoardBean> getAllBoard(int startRow, int endRow);
 
+	public PageNavigator getPageNavigator(int currentPage);
 }

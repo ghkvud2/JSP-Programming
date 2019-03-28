@@ -30,7 +30,7 @@
 		int totalCount = boardDAO.getAllCount(); //3. 전체 글의 갯수를 저장하는 변수
 		int number = 0; //4. 페이지 넘버링 변수
 		int currentPage = Integer.parseInt(pageNum); //5. 현재 보고자 하는 페이지
-
+		
 		//6. 현재 페이지를 보여줄 시작 번호를 지정
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = currentPage * pageSize;

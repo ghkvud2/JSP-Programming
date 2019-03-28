@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.board.model.bean.BoardBean;
 import com.board.model.service.BoardServiceImpl;
+import com.board.util.PageNavigator;
 
 public class BoardListAction implements Action {
 
@@ -32,8 +33,15 @@ public class BoardListAction implements Action {
 	public String action(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<BoardBean> list = BoardServiceImpl.getInstance().getAllBoard();
+		int currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		PageNavigator pageNavigator = BoardServiceImpl.getInstance().getPageNavigator(currentPage);
+		
+		int startRow = pageNavigator.getStartRow();
+		int endRow = pageNavigator.getEndRow();
+		List<BoardBean> list = BoardServiceImpl.getInstance().getAllBoard(startRow,endRow);
+		
 		request.setAttribute("list", list);
+		request.setAttribute("pageNavigator", pageNavigator);
 		return "move_list.do";
 	}
 

@@ -43,7 +43,7 @@
 				<input type="submit" value="삭제"> &nbsp; &nbsp; 
 				<!-- 가끔씩 form 태그안에 button태그를 사용하면 
 				무조건 submit이 되는 경우가 있는데 그때 type="button"을 추가해주면 된다.-->
-				<button onclick="location.href='list.do'">전체 글보기</button>
+				<button type="button" onclick="location.href='list.do?currentPage=1'">전체 글보기</button>
 				</td>
 			</tr>
 		</table>

@@ -10,6 +10,7 @@ import java.util.List;
 import com.board.model.bean.BoardBean;
 import com.board.util.DBClose;
 import com.board.util.DBConnection;
+import com.board.util.PageNavigator;
 
 public class BoardDAOImpl implements BoardDAO {
 
@@ -161,7 +162,7 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public List<BoardBean> getAllBoard() {
+	public List<BoardBean> getAllBoard(int startRow, int endRow) {
 
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -170,9 +171,19 @@ public class BoardDAOImpl implements BoardDAO {
 
 		try {
 
-			String sql = "select * from board order by ref desc, re_step asc, re_level asc";
+			String sql = "select B.* " + 
+					"from (" + 
+					"    select rownum as rnum, A.* " + 
+					"    from (" + 
+					"        select * " + 
+					"        from board" + 
+					"        order by ref desc, re_step asc, re_level asc) A " + 
+					"    where rownum <= ?) B " + 
+					" where B.rnum >= ? ";
 			conn = DBConnection.getConnection();
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
@@ -236,12 +247,40 @@ public class BoardDAOImpl implements BoardDAO {
 			pstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			DBClose.close(conn, pstmt, rs);
 		}
 
+	}
+
+	@Override
+	public PageNavigator getPageNavigator(int currentPage) {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		PageNavigator pageNavigator = new PageNavigator();
+		int totalCount = 0;
+		try {
+			conn = DBConnection.getConnection();
+
+			String sql = "select count(*) from board";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next())
+				totalCount = rs.getInt(1);
+
+			pageNavigator.setCurrentPage(currentPage);
+			pageNavigator.setTotalCount(totalCount);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBClose.close(conn, pstmt, rs);
+		}
+		pageNavigator.makePaging();
+		return pageNavigator;
 	}
 
 }

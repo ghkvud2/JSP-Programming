@@ -3,6 +3,7 @@ package com.board.model.dao;
 import java.util.List;
 
 import com.board.model.bean.BoardBean;
+import com.board.util.PageNavigator;
 
 public interface BoardDAO {
 
@@ -16,6 +17,8 @@ public interface BoardDAO {
 
 	public BoardBean getOneBoard(int num);
 
-	public List<BoardBean> getAllBoard();
+	public List<BoardBean> getAllBoard(int startRow, int endRow);
+	
+	public PageNavigator getPageNavigator(int currentPage);
 
 }
