@@ -6,12 +6,27 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class BoardDeleteAction implements action {
+public class BoardDeleteAction implements Action {
+
+	private static BoardDeleteAction boardDeleteAction;
+	static {
+		boardDeleteAction = new BoardDeleteAction();
+	}
+
+	private BoardDeleteAction() {
+	}
+
+	public static BoardDeleteAction getInstance() {
+		
+		if (boardDeleteAction == null)
+			boardDeleteAction = new BoardDeleteAction();
+		
+		return boardDeleteAction;
+	}
 
 	@Override
 	public String action(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

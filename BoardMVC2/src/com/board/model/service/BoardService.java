@@ -1,10 +1,10 @@
-package com.board.model.dao;
+package com.board.model.service;
 
 import java.util.List;
 
 import com.board.model.bean.BoardBean;
 
-public interface BoardDAO {
+public interface BoardService {
 
 	public void deleteBoard(int num);
 
