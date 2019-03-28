@@ -18,8 +18,8 @@
 
 <h1 align="center">답변글 쓰기</h1>
 
-	<form action="BoardReWriteProc.jsp" method="post">
-	<!-- 사용자로부터 데이터를 입력받지 않고 BoarReWriteProc.jsp로 보낸다. -->
+	<form action="BoardReplyProc.jsp" method="post">
+	<!-- 사용자로부터 데이터를 입력받지 않고 BoarReplyProc.jsp로 보낸다. -->
 	<input type="hidden" name="num" value="<%=num %>">
 	<input type="hidden" name="ref" value="<%=ref %>">
 	<input type="hidden" name="re_step" value="<%=re_step %>">

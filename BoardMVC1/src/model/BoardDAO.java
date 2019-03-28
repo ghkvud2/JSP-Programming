@@ -94,7 +94,7 @@ public class BoardDAO {
 	}
 
 	// 답변 게시글을 저장하는 메소드
-	public void reWriteBoard(BoardBean boardBean) {
+	public void replyBoard(BoardBean boardBean) {
 
 		// 우선적으로 부모 글의 [글 그룹], [글 스텝], [글 레벨] 값을 읽어드린다.
 		int ref = boardBean.getRef();

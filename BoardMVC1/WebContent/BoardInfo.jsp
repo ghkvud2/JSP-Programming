@@ -48,7 +48,7 @@
 		<tr height="40">
 			<td align="center" colspan="4">
 			<input type="button" value="답변 쓰기"
-				onclick="location.href='BoardReWriteForm.jsp?num=<%=boardBean.getNum()%>&ref=<%=boardBean.getRef()%>&re_step=<%=boardBean.getRe_step()%>&re_level=<%=boardBean.getRe_level()%>'">&nbsp; &nbsp;
+				onclick="location.href='BoardReplyForm.jsp?num=<%=boardBean.getNum()%>&ref=<%=boardBean.getRef()%>&re_step=<%=boardBean.getRe_step()%>&re_level=<%=boardBean.getRe_level()%>'">&nbsp; &nbsp;
 			<input type="button" value="수정하기" onclick="location.href='BoardUpdateForm.jsp?num=<%=boardBean.getNum() %>'">&nbsp; &nbsp;
 			<input type="button" value="삭제하기" onclick="location.href='BoardDeleteForm.jsp?num=<%=boardBean.getNum() %>'">&nbsp; &nbsp;
 			<input type="button" value="목록보기" onclick="location.href='BoardList.jsp?num=<%=boardBean.getNum() %>'">
