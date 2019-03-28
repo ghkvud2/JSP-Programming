@@ -28,7 +28,7 @@ public class BoardInfoAction implements Action {
 	public String action(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		
+		 
 		return null;
 	}
 
