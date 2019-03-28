@@ -34,7 +34,7 @@ public class BoardListAction implements Action {
 
 		List<BoardBean> list = BoardServiceImpl.getInstance().getAllBoard();
 		request.setAttribute("list", list);
-		return "BoardList.jsp";
+		return "move_list.do";
 	}
 
 }

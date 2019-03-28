@@ -24,20 +24,17 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void deleteBoard(int num) {
-		// TODO Auto-generated method stub
-
+		BoardDAOImpl.getInstance().deleteBoard(num);
 	}
 
 	@Override
 	public void updateBoard(BoardBean boardBean) {
-		// TODO Auto-generated method stub
-
+		BoardDAOImpl.getInstance().updateBoard(boardBean);
 	}
 
 	@Override
 	public void replyBoard(BoardBean boardBean) {
-		// TODO Auto-generated method stub
-
+		BoardDAOImpl.getInstance().replyBoard(boardBean);
 	}
 
 	@Override
@@ -47,8 +44,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardBean getOneBoard(int num) {
-		// TODO Auto-generated method stub
-		return null;
+		return BoardDAOImpl.getInstance().getOneBoard(num);
 	}
 
 	@Override

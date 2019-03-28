@@ -18,7 +18,7 @@
 
 	<%
 		BoardDAO boardDAO = new BoardDAO();
-		boardDAO.reWriteBoard(boardBean);
+		boardDAO.replyBoard(boardBean);
 		response.sendRedirect("BoardList.jsp");
 	%>
 </body>

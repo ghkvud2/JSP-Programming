@@ -6,6 +6,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.board.model.bean.BoardBean;
+import com.board.model.service.BoardServiceImpl;
+
 public class BoardUpdateAction implements Action {
 
 	private static BoardUpdateAction boardUpdateAction;
@@ -27,8 +30,22 @@ public class BoardUpdateAction implements Action {
 	@Override
 	public String action(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+
+		int num = Integer.parseInt(request.getParameter("num"));
+		String inputPassword = request.getParameter("password");
+		String dbPassword = request.getParameter("dbpassword");
+
+		BoardBean boardBean = new BoardBean();
+		boardBean.setNum(num);
+		boardBean.setSubject(request.getParameter("subject"));
+		boardBean.setContent(request.getParameter("content"));
+
+		if (dbPassword.equals(inputPassword)) {
+			BoardServiceImpl.getInstance().updateBoard(boardBean);
+			return "list.do";
+		} else {
+			return "move_error.do";
+		}
 	}
 
 }

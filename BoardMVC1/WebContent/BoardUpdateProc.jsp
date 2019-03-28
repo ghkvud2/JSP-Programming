@@ -22,6 +22,7 @@
 		//우선 해당 게시글의 비밀번호가 일치하는지 확인한다.
 		String inputPassword = boardBean.getPassword();
 		String dbPassword = boardDAO.getOneBoard(boardBean.getNum()).getPassword();
+		
 		//비밀번호가 일치하면 수정된 내용을 DB에 반영한다.
 		if (inputPassword.equals(dbPassword)) {
 			boardDAO.updateBoard(boardBean);

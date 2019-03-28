@@ -30,6 +30,9 @@
 		<tr height="40">
 			<td width="50" align="center">나중에 구현</td>
 			<td width="350" align="left">
+			<c:forEach var="i" begin="1" end="${boardBean.re_step }">
+				&nbsp;&nbsp;&nbsp;
+			</c:forEach>
 				<a href="info.do?num=${boardBean.num}" style="text-decoration: none">${boardBean.subject}
 			</td>
 			<td width="150" align="center">${boardBean.writer}</td>
