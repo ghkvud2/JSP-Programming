@@ -32,13 +32,14 @@
 			<td width="100" align="center">조회수</td>
 		</tr>
 
-		<c:forEach var="boardBean" items="${list }">
+		<c:forEach var="boardBean" items="${list}">
 			<tr height="40">
 				<td width="50" align="center">${boardBean.num }</td>
-				<td width="350" align="left"><c:forEach var="i" begin="1"
-						end="${boardBean.re_step }">
-				&nbsp;&nbsp;&nbsp;
-			</c:forEach> <a href="info.do?num=${boardBean.num}" style="text-decoration: none">${boardBean.subject}</td>
+				<td width="350" align="left">
+				<c:forEach var="i" begin="1" end="${boardBean.re_step }">
+					&nbsp;&nbsp;&nbsp;
+				</c:forEach> 
+				<a href="info.do?num=${boardBean.num}" style="text-decoration: none">${boardBean.subject}</td>
 				<td width="150" align="center">${boardBean.writer}</td>
 				<td width="150" align="center">${boardBean.reg_date}</td>
 				<td width="100" align="center">${boardBean.readcount}</td>
